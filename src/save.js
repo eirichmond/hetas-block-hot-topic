@@ -4,6 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
+import { RichText } from '@wordpress/block-editor';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -14,13 +15,25 @@ import { __ } from '@wordpress/i18n';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
+export default function save( { className, attributes } ) {
+
+	const {
+		linksto,
+		color,
+		content,
+		imgUrl,
+	} = attributes;
+
 	return (
-		<p>
-			{ __(
-				'Hetas Block Hot Topic – hello from the saved content!',
-				'hetas-block-hot-topic'
-			) }
-		</p>
+		<div className={ className + ` hetas-dimmed-feature-box` }>
+            <a href={ linksto } class="href"></a>
+            <div className={`colored centered covered ${color}`}></div>
+			<img src={imgUrl} />
+            <div class="centered">
+				<RichText.Content
+					value={ content } />
+                <div className={`pane ${color}`}></div>
+            </div>
+        </div>
 	);
 }

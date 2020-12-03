@@ -68,6 +68,28 @@ registerBlockType( 'create-block/hetas-block-hot-topic', {
 		html: false,
 	},
 
+	attributes: {
+		linksto: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'a',
+			attribute: 'href',
+		},
+		color: {
+			type: 'string',
+			default: 'hetas-green'
+		},
+		content: {
+            type: 'string',
+            source: 'text',
+        },
+		imgUrl: {
+			type: 'string',
+			default: 'https://via.placeholder.com/635x474'
+		}
+    },
+
+
 	/**
 	 * @see ./edit.js
 	 */

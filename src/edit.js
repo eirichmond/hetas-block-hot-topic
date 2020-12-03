@@ -4,6 +4,8 @@
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
+import { RichText, InspectorControls, MediaUpload } from '@wordpress/block-editor';
+import { PanelBody, PanelRow, CheckboxControl, SelectControl, ColorPicker, TextControl } from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -24,14 +26,66 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( { className } ) {
+export default function Edit( { className, attributes, setAttributes } ) {
+
+	function selectImage(value) {
+        console.log(value);
+        setAttributes({
+            imgUrl: value.sizes.full.url,
+        })
+    }
+
 	return (
-		<div className={ className }>
-            <a href="https://temp.hetas.co.uk" class="href"></a>
-            <div class="colored centered covered hetas-red"></div>
-            <img src="https://temp.hetas.co.uk/wp-content/mediauploads/Screenshot-2020-10-26-at-18.07.25.png" alt="image with tractor" class="noclass"/>
-            <div class="centered">Hotter topic from HETAS
-                <div class="pane hetas-red"></div>
+		<div className={ className + ` hetas-dimmed-feature-box`}>
+            <InspectorControls>
+				<PanelBody
+					title="Hot Topic"
+					initialOpen={true}
+				>
+					<PanelRow>
+                    <TextControl
+                        label="Link To"
+                        value={ attributes.linksto }
+                        onChange={ ( linkstoval ) => setAttributes( { linksto:linkstoval } ) }
+                    />
+					</PanelRow>
+					<PanelRow>
+						<SelectControl
+							label="Colour Brand"
+							value={attributes.color}
+							options={[
+								{label: "HETAS Green", value: 'hetas-green'},
+								{label: "HETAS Orange", value: 'hetas-orange'},
+								{label: "HETAS Red", value: 'hetas-red'},
+							]}
+							onChange={(newcol) => setAttributes({ color: newcol })}
+						/>
+					</PanelRow>
+
+
+                    
+				</PanelBody>
+                
+			</InspectorControls>
+            <a href={ attributes.linksto } class="href"></a>
+            <div className={`colored centered covered ${attributes.color}`}></div>
+            <MediaUpload 
+                onSelect={selectImage}
+                render={ ({open}) => {
+                    return <img 
+                        src={attributes.imgUrl}
+                        onClick={open}
+                        />;
+                }}
+            />
+            <div class="centered">
+                <RichText
+                    value={ attributes.content } // Any existing content, either from the database or an attribute default
+                    formattingControls={ [ 'bold', 'italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+                    onChange={ ( content ) => setAttributes( { content } ) } // Store updated content as a block attribute
+                    placeholder={ __( 'Hot topic...' ) } // Display this text before any content has been added by the user
+                />
+                <div className={`pane ${attributes.color}`}></div>
             </div>
         </div>
 
