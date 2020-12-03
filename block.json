@@ -1,0 +1,14 @@
+{
+	"name": "create-block/hetas-block-hot-topic",
+	"title": "Hetas Block Hot Topic",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"textdomain": "hetas-block-hot-topic",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
