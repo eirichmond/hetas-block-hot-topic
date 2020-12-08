@@ -6,7 +6,78 @@
  */
 
 .wp-block-create-block-hetas-block-hot-topic {
-	background-color: var(--wp-admin-theme-color);
-	color: #fff;
-	padding: 2px;
+	// background-color: var(--wp-admin-theme-color);
+	// color: #fff;
+	// padding: 2px;
+	position: relative;
+	a.href::before {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 3;
+	}
+	a.href {
+		text-decoration: none;
+	}
+	a ~ .colored {
+		mix-blend-mode: overlay;
+		z-index: 1;
+		transition: all .5s ease-in-out;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	a ~ .colored ~ .centered {
+		transition: all .5s ease-in-out;
+	}
+	a:hover ~ .hetas-orange ~ .centered {
+		background-color: var(--hetas-orange);
+	}
+	a:hover  ~ .colored.hetas-orange {
+		background-color: var(--hetas-orange);
+	}
+
+	a:hover ~ .hetas-green ~ .centered {
+		background-color: var(--hetas-green);
+	}
+	a:hover  ~ .colored.hetas-green {
+		background-color: var(--hetas-green);
+	}
+
+	a:hover ~ .hetas-red ~ .centered {
+		background-color: var(--hetas-red);
+	}
+	a:hover  ~ .colored.hetas-red {
+		background-color: var(--hetas-red);
+	}
+
+	a ~ img {
+		transition: all .5s ease-in-out;
+		&.noclass {
+			filter: grayscale(1);
+		}
+	}
+	a:hover ~ img {
+		//filter: grayscale(0);
+	}
+	.centered {
+		position: absolute;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		text-align: center;
+		left: 50%;
+		width: 80%;
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 2rem;
+		font-size: 1.75em;
+		color: #fff;
+	}
+	
 }
+
+
+  
