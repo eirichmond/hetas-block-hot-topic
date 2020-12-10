@@ -28,7 +28,7 @@ export default function save( { className, attributes } ) {
 		<div className={ className + ` hetas-dimmed-feature-box` }>
             <a href={ linksto } class="href"></a>
             <div className={`colored centered covered ${color}`}></div>
-			<img src={imgUrl} />
+			<img src={imgUrl} className={`noclass`}/>
             <div class="centered">
 				<RichText.Content
 					value={ content } />

@@ -49,6 +49,17 @@ export default function Edit( { className, attributes, setAttributes } ) {
                         onChange={ ( linkstoval ) => setAttributes( { linksto:linkstoval } ) }
                     />
 					</PanelRow>
+                    <PanelRow>
+                    <MediaUpload 
+                        onSelect={selectImage}
+                        render={ ({open}) => {
+                            return <img 
+                                src={attributes.imgUrl}
+                                onClick={open}
+                                />;
+                        }}
+                    />
+                    </PanelRow>
 					<PanelRow>
 						<SelectControl
 							label="Colour Brand"
@@ -69,15 +80,7 @@ export default function Edit( { className, attributes, setAttributes } ) {
 			</InspectorControls>
             <a href={ attributes.linksto } class="href"></a>
             <div className={`colored centered covered ${attributes.color}`}></div>
-            <MediaUpload 
-                onSelect={selectImage}
-                render={ ({open}) => {
-                    return <img 
-                        src={attributes.imgUrl}
-                        onClick={open}
-                        />;
-                }}
-            />
+            <img src={attributes.imgUrl} alt="HETAS hot topic related image" className={`noclass`} />
             <div class="centered">
                 <RichText
                     value={ attributes.content } // Any existing content, either from the database or an attribute default
